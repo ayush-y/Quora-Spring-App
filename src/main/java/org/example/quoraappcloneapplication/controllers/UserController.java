@@ -1,7 +1,10 @@
 package org.example.quoraappcloneapplication.controllers;
 
+import jakarta.websocket.server.PathParam;
+import org.example.quoraappcloneapplication.Services.UserFeedService;
 import org.example.quoraappcloneapplication.Services.UserService;
 import org.example.quoraappcloneapplication.dtos.UserDTO;
+import org.example.quoraappcloneapplication.modles.Question;
 import org.example.quoraappcloneapplication.modles.User;
 import org.example.quoraappcloneapplication.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +19,11 @@ public class UserController {
 
     private UserService userService;
 
-    public UserController(UserService userService){
+    private UserFeedService userFeedService;
+
+    public UserController(UserService userService, UserFeedService userFeedService){
         this.userService = userService;
+        this.userFeedService = userFeedService;
     }
 
     @GetMapping
@@ -46,6 +52,11 @@ public class UserController {
         userService.followTag(userId, tagId);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{id}/feed")
+    public ResponseEntity<List<Question>> getUserFeed (@PathVariable Long userId, @RequestParam int page, @RequestParam int size){
+        return ResponseEntity.ok(userFeedService.getUserFeed(userId, page, size));
     }
 
 }
