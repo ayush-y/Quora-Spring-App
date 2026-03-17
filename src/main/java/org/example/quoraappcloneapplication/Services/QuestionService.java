@@ -1,10 +1,9 @@
 package org.example.quoraappcloneapplication.Services;
 
 import org.example.quoraappcloneapplication.dtos.QuestionDTO;
-import org.example.quoraappcloneapplication.dtos.TagDTO;
 import org.example.quoraappcloneapplication.modles.Question;
 import org.example.quoraappcloneapplication.modles.Tag;
-import org.example.quoraappcloneapplication.modles.User;
+import org.example.quoraappcloneapplication.modles.Users;
 import org.example.quoraappcloneapplication.repositories.QuestionRepository;
 import org.example.quoraappcloneapplication.repositories.TagRepository;
 import org.example.quoraappcloneapplication.repositories.UserRepository;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 @Service
 public class QuestionService {
@@ -75,7 +73,7 @@ public class QuestionService {
         question.setContent(questionDTO.getContent());
 
         // ✅ Set User
-        Optional<User> user = userRepository.findById(questionDTO.getUserId());
+        Optional<Users> user = userRepository.findById(questionDTO.getUserId());
         user.ifPresent(question::setUser);
 
         // ✅ Convert tagIds -> Tag entities

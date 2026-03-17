@@ -25,6 +25,6 @@ public class Question extends BaseModel {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
 }

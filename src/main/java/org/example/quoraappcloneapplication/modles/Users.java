@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class User extends BaseModel{
+public class Users extends BaseModel{
 
     private String username;
 

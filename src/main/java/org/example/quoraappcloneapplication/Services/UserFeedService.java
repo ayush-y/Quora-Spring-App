@@ -2,7 +2,7 @@ package org.example.quoraappcloneapplication.Services;
 
 import org.example.quoraappcloneapplication.modles.Question;
 import org.example.quoraappcloneapplication.modles.Tag;
-import org.example.quoraappcloneapplication.modles.User;
+import org.example.quoraappcloneapplication.modles.Users;
 import org.example.quoraappcloneapplication.repositories.QuestionRepository;
 import org.example.quoraappcloneapplication.repositories.UserRepository;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +26,7 @@ public class UserFeedService {
 
     public List<Question> getUserFeed(Long userId, int page, int size){
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
+        Users user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
 
         Set<Long> tagIds = user.getFollowedTags().stream().map(Tag::getId).collect(Collectors.toSet());
 

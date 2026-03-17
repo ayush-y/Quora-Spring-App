@@ -1,12 +1,10 @@
 package org.example.quoraappcloneapplication.controllers;
 
-import jakarta.websocket.server.PathParam;
 import org.example.quoraappcloneapplication.Services.UserFeedService;
 import org.example.quoraappcloneapplication.Services.UserService;
 import org.example.quoraappcloneapplication.dtos.UserDTO;
 import org.example.quoraappcloneapplication.modles.Question;
-import org.example.quoraappcloneapplication.modles.User;
-import org.example.quoraappcloneapplication.repositories.UserRepository;
+import org.example.quoraappcloneapplication.modles.Users;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,17 +25,17 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<Users> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/id")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
-        Optional<User> user = userService.getUserById(id);
+    public ResponseEntity<Users> getUserById(@PathVariable Long id){
+        Optional<Users> user = userService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     @PostMapping
-    public User createUser(@RequestBody UserDTO userDTO){
+    public Users createUser(@RequestBody UserDTO userDTO){
 
         return userService.createUser(userDTO);
     }
