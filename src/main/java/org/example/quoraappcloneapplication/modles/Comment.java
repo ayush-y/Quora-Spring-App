@@ -30,7 +30,7 @@ public class Comment extends BaseModel{
             inverseJoinColumns = @JoinColumn(name = "user_id")
 
     )
-    private Set<User> user;
+    private Set<Users> user;
 
 
 }

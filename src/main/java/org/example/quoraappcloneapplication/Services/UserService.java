@@ -2,7 +2,7 @@ package org.example.quoraappcloneapplication.Services;
 
 import org.example.quoraappcloneapplication.dtos.UserDTO;
 import org.example.quoraappcloneapplication.modles.Tag;
-import org.example.quoraappcloneapplication.modles.User;
+import org.example.quoraappcloneapplication.modles.Users;
 import org.example.quoraappcloneapplication.repositories.TagRepository;
 import org.example.quoraappcloneapplication.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,17 +20,17 @@ public class UserService {
         this.userRepository = userRepository;
         this.tagRepository = tagRepository;
     }
-    public List<User> getAllUsers(){
+    public List<Users> getAllUsers(){
 
         return userRepository.findAll();
     }
-    public Optional<User> getUserById(Long id){
+    public Optional<Users> getUserById(Long id){
 
         return userRepository.findById(id);
     }
-    public User createUser(UserDTO userDto){
+    public Users createUser(UserDTO userDto){
 
-        User user = new User();
+        Users user = new Users();
         user.setUsername(userDto.getUserName());
         user.setPassword(userDto.getPassword());
         return userRepository.save(user);
@@ -41,7 +41,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
     public void followTag(Long userId, Long tagId){
-        User user = userRepository.findById(userId).orElseThrow(() ->
+        Users user = userRepository.findById(userId).orElseThrow(() ->
                 new RuntimeException("User is not found"));
         Tag tag = tagRepository.findById(tagId).orElseThrow(() ->
                 new RuntimeException("tag not found"));

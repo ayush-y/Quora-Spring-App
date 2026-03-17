@@ -3,7 +3,7 @@ package org.example.quoraappcloneapplication.Services;
 import org.example.quoraappcloneapplication.dtos.AnswerDTO;
 import org.example.quoraappcloneapplication.modles.Answer;
 import org.example.quoraappcloneapplication.modles.Question;
-import org.example.quoraappcloneapplication.modles.User;
+import org.example.quoraappcloneapplication.modles.Users;
 import org.example.quoraappcloneapplication.repositories.AnswerRepository;
 import org.example.quoraappcloneapplication.repositories.QuestionRepository;
 import org.example.quoraappcloneapplication.repositories.UserRepository;
@@ -45,7 +45,7 @@ public class AnswerService {
         Optional<Question>  question = questionRepository.findById(answerDTO.getQuestionId());
         question.ifPresent(answer::setQuestion);
 
-        Optional<User> user = userRepository.findById(answerDTO.getUserId());
+        Optional<Users> user = userRepository.findById(answerDTO.getUserId());
         user.ifPresent(answer::setUser);
 
         return answerRepository.save(answer);
